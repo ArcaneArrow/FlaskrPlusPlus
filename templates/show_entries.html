@@ -1,15 +1,19 @@
 {% extends "layout.html" %}
 {% block body %}
   <form action="{{ url_for('add_entry') }}" method="post" class="add-entry">
-    <dl>
-      <dt>Title:
-      <dd><input type="text" size="30" name="title">
-      <dt>Category:
-      <dd><input type="text" size="30" name="category">
-      <dt>Text:
-      <dd><textarea name="text" rows="5" cols="40"></textarea>
-      <dd><input type="submit" value="Share">
-    </dl>
+    <div class="mb-3">
+      <label for="InputTitle1" class="form-label">Title</label>
+      <input type="text" class="form-control" id="InputTitle1">
+    </div>
+    <div class="mb-3">
+      <label for="InputCategory1" class="form-label">Category</label>
+      <input type="text" class="form-control" id="InputCategory1">
+    </div>
+    <div class="mb-3">
+      <label for="InputText1" class="form-label">Text</label>
+      <input type="text" class="form-control" id="InputText1">
+    </div>
+    <button type="submit" class="btn btn-primary">Share</button>
   </form>
   <h2>Categories</h2>
   <ul class="categories">
