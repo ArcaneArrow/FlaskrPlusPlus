@@ -106,3 +106,19 @@ def delete_entry():
     db.commit()
     flash('Entry deleted')
     return redirect(url_for('show_entries'))
+
+@app.route('/edit', methods=['post'])
+def edit_entry():
+    db = get_db()
+    cur = db.execute('SELECT id, title, category, text FROM entries WHERE id = ?', [request.form['id']])
+    entries = cur.fetchall()
+    return render_template('edit_entry.html', entries=entries)
+
+@app.route('/update', methods=['post'])
+def update_entry():
+    db = get_db()
+    db.execute('UPDATE entries set title = ?, category = ?, text = ? WHERE id = ?',
+               [request.form['title'], request.form['category'], request.form['text'], request.form['id']])
+    db.commit()
+    flash('Entry was successfully updated')
+    return redirect(url_for('show_entries'))

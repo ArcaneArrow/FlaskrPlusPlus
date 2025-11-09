@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+{% for entry in entries %}
+  <form action="{{ url_for('update_entry') }}" method="post" class="update-entry">
+    <div class="mb-3">
+      <label for="InputTitle1" class="form-label">Title</label>
+      <input name="title" type="text" class="form-control" id="InputTitle1" value="{{ entry.title }}">
+    </div>
+    <div class="mb-3">
+      <label for="InputCategory1" class="form-label">Category</label>
+      <input name="category" type="text" class="form-control" id="InputCategory1" value="{{ entry.category }}">
+    </div>
+    <div class="mb-3">
+      <label for="InputText1" class="form-label">Text</label>
+      <input name="text" type="text" class="form-control" id="InputText1" value="{{ entry.text }}">
+    </div>
+    <input type="hidden" name="id" value="{{ entry.id }}">
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+{% endfor %}
+{% endblock %}

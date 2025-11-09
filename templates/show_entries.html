@@ -3,15 +3,15 @@
   <form action="{{ url_for('add_entry') }}" method="post" class="add-entry">
     <div class="mb-3">
       <label for="InputTitle1" class="form-label">Title</label>
-      <input type="text" class="form-control" id="InputTitle1">
+      <input name="title" type="text" class="form-control" id="InputTitle1">
     </div>
     <div class="mb-3">
       <label for="InputCategory1" class="form-label">Category</label>
-      <input type="text" class="form-control" id="InputCategory1">
+      <input name="category" type="text" class="form-control" id="InputCategory1">
     </div>
     <div class="mb-3">
       <label for="InputText1" class="form-label">Text</label>
-      <input type="text" class="form-control" id="InputText1">
+      <input name="text" type="text" class="form-control" id="InputText1">
     </div>
     <button type="submit" class="btn btn-primary">Share</button>
   </form>
@@ -23,22 +23,39 @@
   {% endfor %}
   </ul>
   <h2>Posts</h2>
-  <ul class="entries">
+  <div class="container text-center">
   {% for entry in entries %}
-    <li>
+    <div class="row">
+      <div class="col">
         <h3>{{ entry.title }}</h3>
+      </div>
+      <div class="col">
         <i>[{{ entry.category }}]</i>
-        <p>{{ entry.text|safe }}</p>
-        <!-- A form to submit a delete request for the current entry.
-             Uses a hidden input to be able to pass the current id
-             to the request handler. -->
+      </div>
+      <div class="col">
         <form action="{{ url_for('delete_entry') }}" method="post">
           <input type="hidden" name="id" value="{{ entry.id }}">
           <button type="submit" class="del-button">Delete</button>
         </form>
-    </li>
+      </div>
+      <div class="col">
+        <form action="{{ url_for('edit_entry') }}" method="post">
+          <input type="hidden" name="id" value="{{ entry.id }}">
+          <button type="submit" class="edit-button">Edit</button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>{{ entry.text|safe }}</p>
+      </div>
+    </div>
   {% else %}
-    <li><em>Unbelievable.  No entries here so far</em></li>
+    <div class="row">
+      <div class="col">
+        <em>Unbelievable.  No entries here so far</em>
+      </div>
+    </div>
   {% endfor %}
-  </ul>
+  </div>
 {% endblock %}
